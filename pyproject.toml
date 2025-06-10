@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medical_fl"
+authors = [
+    {name = "Arthur Matheus do Nascimento", email = "art.dnascimento@gmail.com"}
+]
+description = "Module for Federated Learning applied to a medical scenario with MEDMNIST 3D CT dataset"
+version = "0.0.1"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "torch",
+    "flwr",
+    "matplotlib",
+    "numpy"
+]
+
+[tool.setuptools]
+packages = ["medical_fl"]

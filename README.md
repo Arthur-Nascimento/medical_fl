@@ -19,3 +19,7 @@ pip install -e .
 
 This will enable you to change the module code on the fly
 
+
+## TODO
+* How to use FederatedDataset to divide the data?
+* 

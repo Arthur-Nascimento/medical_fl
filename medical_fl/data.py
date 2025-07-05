@@ -37,7 +37,7 @@ def load_data_iid(partition_id: int,
 
     # Criar um DataLoader para cada partição
     train_loaders = [DataLoader(part, batch_size=32, shuffle=True) for part in train_partitions]
-    val_loaders = [DataLoader(part, batch_size=32, shuffle=True) for part in val_partitions]
+    val_loaders = [DataLoader(part, batch_size=32, shuffle=True, drop_last=True) for part in val_partitions]
 
     # Carregar o dataset de teste (geralmente é centralizado e não particionado)
     test_loader = DataLoader(OrganMNIST3D(split="test", download=True), batch_size=32)
@@ -104,7 +104,7 @@ def load_data_niid(partition_id: int,
     trainloader = DataLoader(train_set, batch_size=32)
     val_partitions = split_idx(full_val_dataset)
     val_set = torch.utils.data.Subset(full_train_dataset, val_partitions[partition_id])
-    valloader = DataLoader(val_set, batch_size=32)
+    valloader = DataLoader(val_set, batch_size=32, shuffle=True, drop_last=True)
 
     testloader = DataLoader(OrganMNIST3D(split="test", download=True), batch_size=32)
     return trainloader, valloader, testloader

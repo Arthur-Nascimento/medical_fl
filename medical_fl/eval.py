@@ -12,13 +12,15 @@ def test(net, testloader):
     net.eval()
     with torch.no_grad():
         for images, labels in testloader:
-            print(len(images))
             images, labels = images.cuda().float(), labels.cuda().long()
             outputs = net(images)
-            labels = labels.squeeze()
+            if len(labels.shape) > 1:
+                labels = labels.squeeze()
             loss += criterion(outputs, labels).item()
             total += labels.size(0)
             correct += (torch.max(outputs.data, 1)[1] == labels).sum().item()
+    if total == 0:
+        return loss / len(testloader.dataset), 0
     return loss / len(testloader.dataset), correct / total
 
 
